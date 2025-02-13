@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtemisApi", "ArtemisApi\ArtemisApi.csproj", "{F2A4D624-3BDA-4794-A47A-48DD54CD7FE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityApi", "IdentityApi\IdentityApi.csproj", "{EC3256F0-B5E5-4BAC-AB00-219B1AD75DF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{BF5EBA94-4A08-4F83-A927-BF89EC832289}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F2A4D624-3BDA-4794-A47A-48DD54CD7FE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2A4D624-3BDA-4794-A47A-48DD54CD7FE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2A4D624-3BDA-4794-A47A-48DD54CD7FE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2A4D624-3BDA-4794-A47A-48DD54CD7FE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC3256F0-B5E5-4BAC-AB00-219B1AD75DF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC3256F0-B5E5-4BAC-AB00-219B1AD75DF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC3256F0-B5E5-4BAC-AB00-219B1AD75DF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC3256F0-B5E5-4BAC-AB00-219B1AD75DF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF5EBA94-4A08-4F83-A927-BF89EC832289}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF5EBA94-4A08-4F83-A927-BF89EC832289}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF5EBA94-4A08-4F83-A927-BF89EC832289}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF5EBA94-4A08-4F83-A927-BF89EC832289}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

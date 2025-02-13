@@ -1,0 +1,11 @@
+C:\Learning\dotnet\Artemis\Common\bin\Debug\net8.0\Common.deps.json
+C:\Learning\dotnet\Artemis\Common\bin\Debug\net8.0\Common.dll
+C:\Learning\dotnet\Artemis\Common\bin\Debug\net8.0\Common.pdb
+C:\Learning\dotnet\Artemis\Common\obj\Debug\net8.0\Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Learning\dotnet\Artemis\Common\obj\Debug\net8.0\Common.AssemblyInfoInputs.cache
+C:\Learning\dotnet\Artemis\Common\obj\Debug\net8.0\Common.AssemblyInfo.cs
+C:\Learning\dotnet\Artemis\Common\obj\Debug\net8.0\Common.csproj.CoreCompileInputs.cache
+C:\Learning\dotnet\Artemis\Common\obj\Debug\net8.0\Common.dll
+C:\Learning\dotnet\Artemis\Common\obj\Debug\net8.0\refint\Common.dll
+C:\Learning\dotnet\Artemis\Common\obj\Debug\net8.0\Common.pdb
+C:\Learning\dotnet\Artemis\Common\obj\Debug\net8.0\ref\Common.dll

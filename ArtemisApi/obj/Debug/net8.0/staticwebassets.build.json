@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "znj5KQ9f2gJPcoV2VH1ZNZxF3eY1Q5ffrWzPf9X04Xc=",
+  "Source": "ArtemisApi",
+  "BasePath": "_content/ArtemisApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
