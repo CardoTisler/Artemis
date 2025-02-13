@@ -94,3 +94,4 @@ C:\Learning\dotnet\Artemis\IdentityApi\obj\Debug\net8.0\refint\IdentityApi.dll
 C:\Learning\dotnet\Artemis\IdentityApi\obj\Debug\net8.0\IdentityApi.pdb
 C:\Learning\dotnet\Artemis\IdentityApi\obj\Debug\net8.0\IdentityApi.genruntimeconfig.cache
 C:\Learning\dotnet\Artemis\IdentityApi\obj\Debug\net8.0\ref\IdentityApi.dll
+C:\Learning\dotnet\Artemis\IdentityApi\obj\Debug\net8.0\IdentityApi.sourcelink.json

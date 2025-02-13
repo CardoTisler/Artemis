@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityApi.Controllers;
 
-[Route("api/[controller]")]
+[Route("identity")]
 [ApiController]
 public class UserController(
     IUserRepository repository,
@@ -29,7 +29,7 @@ public class UserController(
         if (!passwordHasher.VerifyHashedPassword(user.Password, password))
             return Unauthorized("password is incorrect.");
         
-        var accessToken = tokenGenerator.GenerateToken(email);
+        var accessToken = tokenGenerator.GenerateToken(email, user.Id);
             
         return Ok(new LoginResponse { AccessToken = accessToken});
     }
@@ -40,7 +40,6 @@ public class UserController(
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public IActionResult Register(string email, string password)
     {
-        Console.Write("Running");
         if (!ModelState.IsValid) return BadRequest(ModelState);
         if (repository.GetUserExistsByEmail(email)) return Unauthorized("Email is already registered.");
 

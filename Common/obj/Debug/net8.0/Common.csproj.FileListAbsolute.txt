@@ -9,3 +9,4 @@ C:\Learning\dotnet\Artemis\Common\obj\Debug\net8.0\Common.dll
 C:\Learning\dotnet\Artemis\Common\obj\Debug\net8.0\refint\Common.dll
 C:\Learning\dotnet\Artemis\Common\obj\Debug\net8.0\Common.pdb
 C:\Learning\dotnet\Artemis\Common\obj\Debug\net8.0\ref\Common.dll
+C:\Learning\dotnet\Artemis\Common\obj\Debug\net8.0\Common.sourcelink.json

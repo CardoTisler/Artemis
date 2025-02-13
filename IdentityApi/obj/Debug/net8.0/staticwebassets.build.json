@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "oFFFzImrRJ7y3eJfma36+EcK0xI+J7j0pdHyDUGAGmM=",
+  "Hash": "dwNh0LQd8+0i8/F9FHO7wnvcEBXpNRwONjdlqFKNGSY=",
   "Source": "IdentityApi",
   "BasePath": "_content/IdentityApi",
   "Mode": "Default",
@@ -11,10 +11,10 @@
       "Version": 2,
       "Source": "ArtemisApi",
       "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
-      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishProperties": "",
       "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
       "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
-      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildProperties": "",
       "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
     }
   ],

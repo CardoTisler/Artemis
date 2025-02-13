@@ -4,8 +4,7 @@ namespace Common.Models;
 
 public class Todo
 {
-    [Required]
-    public required int Id { get; set; }
+    public int Id { get; set; }
     
     [Required]
     [StringLength(100, MinimumLength = 1)]
@@ -28,5 +27,5 @@ public class Todo
     public required int UserId { get; set; }
     
     // navigation property
-    public required User User { get; set; }
+    public User User { get; set; }
 }           

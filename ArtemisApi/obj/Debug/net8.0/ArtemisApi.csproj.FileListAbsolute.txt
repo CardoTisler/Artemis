@@ -170,3 +170,4 @@ C:\Learning\dotnet\Artemis\ArtemisApi\bin\Debug\net8.0\runtimes\browser\lib\net8
 C:\Learning\dotnet\Artemis\ArtemisApi\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Learning\dotnet\Artemis\ArtemisApi\bin\Debug\net8.0\Common.dll
 C:\Learning\dotnet\Artemis\ArtemisApi\bin\Debug\net8.0\Common.pdb
+C:\Learning\dotnet\Artemis\ArtemisApi\obj\Debug\net8.0\ArtemisApi.sourcelink.json

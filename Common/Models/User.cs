@@ -14,5 +14,6 @@ public class User
     [Required]
     public required string Password { get; set; }
 
+    // navigation property
     public ICollection<Todo> Todos { get; set; } = new List<Todo>();
 }

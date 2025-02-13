@@ -8,7 +8,7 @@ namespace IdentityApi;
 public class TokenGenerator
 {
     // Ideally Guid userId would also be passed to make integration with other services easier.
-    public string GenerateToken(string email)
+    public string GenerateToken(string email, int userId)
     {
         var tokenHandler = new JsonWebTokenHandler();
         var key = "this-really-should-be-an-env-variable"u8.ToArray();
@@ -17,7 +17,8 @@ public class TokenGenerator
         {
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new(JwtRegisteredClaimNames.Sub, email), // subject
-            new(JwtRegisteredClaimNames.Email, email)
+            new(JwtRegisteredClaimNames.Email, email),
+            new("userId", userId.ToString())
         };
 
         var tokenDescriptor = new SecurityTokenDescriptor
