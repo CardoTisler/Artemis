@@ -28,4 +28,4 @@ public class Todo
     
     // navigation property
     public User User { get; set; }
-}           
+}

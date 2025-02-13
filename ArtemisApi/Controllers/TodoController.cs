@@ -1,12 +1,14 @@
 ﻿using ArtemisApi.Interfaces;
 using Common.Dto;
 using Common.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ArtemisApi.Controllers;
 
 [Route("todo")]
 [ApiController]
+[Authorize]
 public class TodoController : Controller
 {
     private readonly ITodoRepository _repository;

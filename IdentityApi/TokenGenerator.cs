@@ -18,15 +18,16 @@ public class TokenGenerator
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new(JwtRegisteredClaimNames.Sub, email), // subject
             new(JwtRegisteredClaimNames.Email, email),
-            new("userId", userId.ToString())
+            new("userId", userId.ToString()),
+            new(JwtRegisteredClaimNames.Aud, "http://localhost:5084")
         };
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
             Expires = DateTime.UtcNow.AddMinutes(60),
-            Issuer = "https://localhost:5001/",
-            Audience = "https://localhost:5001/",
+            Issuer = "http://localhost:5081/",
+            Audience = "http://localhost:5084/",
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };
         
