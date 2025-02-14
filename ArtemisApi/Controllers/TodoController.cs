@@ -1,4 +1,5 @@
 ﻿using ArtemisApi.Interfaces;
+using ArtemisApi.Services;
 using Common.Dto;
 using Common.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -12,11 +13,13 @@ namespace ArtemisApi.Controllers;
 public class TodoController : Controller
 {
     private readonly ITodoRepository _repository;
+    private readonly KafkaProducerService _producer;
 
 
-    public TodoController(ITodoRepository repository)
+    public TodoController(ITodoRepository repository, KafkaProducerService producer)
     {
         _repository = repository;
+        _producer = producer;
     }
     
     [HttpGet("all", Name = "GetAllTodos")]
@@ -60,6 +63,8 @@ public class TodoController : Controller
         var added = _repository.AddTodo(todo);
         if (added == false) return BadRequest();
 
+        // _producer.SendMessageAsync(new { todo.Id, todo.Title, todo.IsCompleted });
+        
         return Ok(new { Success = true });
     }
 
