@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ArtemisApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e85ca7ad28d502e5270b886851d499814b11d7a2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bb8d3063cdf26a3bc382bdfb0ca736d26d00184e")]
 [assembly: System.Reflection.AssemblyProductAttribute("ArtemisApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ArtemisApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

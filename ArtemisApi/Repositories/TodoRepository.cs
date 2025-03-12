@@ -19,7 +19,7 @@ public class TodoRepository(DataContext context) : ITodoRepository
     public ICollection<Todo> GetTodosByUserId(int userId)
     {
         return context.Todos.Where(todo => todo.UserId == userId).ToList();
-    }
+    } 
 
     public bool AddTodo(Todo todo)
     {
