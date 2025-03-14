@@ -3,8 +3,8 @@ using System;
 using ArtemisApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -18,83 +18,348 @@ namespace ArtemisApi.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "9.0.2")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("Common.Models.Todo", b =>
+            modelBuilder.Entity("ArtemisApi.Models.Book", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Author")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("author");
+
+                    b.Property<string>("CoverImageUrl")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("cover_image_url");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at")
+                        .HasDefaultValueSql("NOW()");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(280)
-                        .HasColumnType("nvarchar(280)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
+                        .HasColumnName("description");
 
-                    b.Property<bool>("IsCompleted")
-                        .HasColumnType("bit");
+                    b.Property<string>("ExternalId")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("external_id");
+
+                    b.Property<int?>("PageCount")
+                        .HasColumnType("integer")
+                        .HasColumnName("page_count");
+
+                    b.Property<DateTime?>("PublishedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("published_date");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)")
+                        .HasColumnName("title");
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                    b.HasKey("Id")
+                        .HasName("pk_books");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.HasIndex("ExternalId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_books_external_id");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Todos");
+                    b.ToTable("books", (string)null);
                 });
 
-            modelBuilder.Entity("Common.Models.User", b =>
+            modelBuilder.Entity("ArtemisApi.Models.ChapterNote", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<Guid>("BookId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("book_id");
+
+                    b.Property<int>("ChapterNumber")
+                        .HasColumnType("integer")
+                        .HasColumnName("chapter_number");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
+                        .HasColumnName("content");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at")
+                        .HasDefaultValueSql("NOW()");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("Id")
+                        .HasName("pk_chapter_notes");
+
+                    b.HasIndex("BookId")
+                        .HasDatabaseName("ix_chapter_notes_book_id");
+
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("ix_chapter_notes_user_id");
+
+                    b.ToTable("chapter_notes", (string)null);
+                });
+
+            modelBuilder.Entity("ArtemisApi.Models.ReadingSession", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<Guid>("BookId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("book_id");
+
+                    b.Property<int>("DurationInSeconds")
+                        .HasColumnType("integer")
+                        .HasColumnName("duration_in_seconds");
+
+                    b.Property<int>("EndPageNumber")
+                        .HasColumnType("integer")
+                        .HasColumnName("end_page_number");
+
+                    b.Property<DateTime?>("SessionEndTimestamp")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("session_end_timestamp");
+
+                    b.PrimitiveCollection<string[]>("Subjects")
+                        .IsRequired()
+                        .HasColumnType("text[]")
+                        .HasColumnName("subjects");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("Id")
+                        .HasName("pk_reading_sessions");
+
+                    b.HasIndex("BookId")
+                        .HasDatabaseName("ix_reading_sessions_book_id");
+
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("ix_reading_sessions_user_id");
+
+                    b.ToTable("reading_sessions", (string)null);
+                });
+
+            modelBuilder.Entity("ArtemisApi.Models.Shelf", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id")
+                        .HasName("pk_shelves");
+
+                    b.ToTable("shelves", (string)null);
+                });
+
+            modelBuilder.Entity("ArtemisApi.Models.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at")
+                        .HasDefaultValueSql("NOW()");
 
                     b.Property<string>("Email")
                         .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("email");
+
+                    b.Property<string>("FirstName")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("first_name");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("LastName")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("last_name");
+
+                    b.Property<string>("PasswordHash")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text")
+                        .HasColumnName("password_hash");
 
-                    b.HasKey("Id");
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
 
-                    b.ToTable("Users");
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("username");
+
+                    b.HasKey("Id")
+                        .HasName("pk_users");
+
+                    b.ToTable("users", (string)null);
                 });
 
-            modelBuilder.Entity("Common.Models.Todo", b =>
+            modelBuilder.Entity("ArtemisApi.Models.UserBook", b =>
                 {
-                    b.HasOne("Common.Models.User", "User")
-                        .WithMany("Todos")
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
+                    b.Property<string>("ShelfId")
+                        .HasColumnType("text")
+                        .HasColumnName("shelf_id");
+
+                    b.Property<Guid>("BookId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("book_id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at")
+                        .HasDefaultValueSql("NOW()");
+
+                    b.HasKey("UserId", "ShelfId", "BookId")
+                        .HasName("pk_user_books");
+
+                    b.HasIndex("BookId")
+                        .HasDatabaseName("ix_user_books_book_id");
+
+                    b.HasIndex("ShelfId")
+                        .HasDatabaseName("ix_user_books_shelf_id");
+
+                    b.ToTable("user_books", (string)null);
+                });
+
+            modelBuilder.Entity("ArtemisApi.Models.ChapterNote", b =>
+                {
+                    b.HasOne("ArtemisApi.Models.Book", "Book")
+                        .WithMany("ChapterNotes")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_chapter_notes_books_book_id");
+
+                    b.HasOne("ArtemisApi.Models.User", "User")
+                        .WithMany("ChapterNotes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_chapter_notes_users_user_id");
+
+                    b.Navigation("Book");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Common.Models.User", b =>
+            modelBuilder.Entity("ArtemisApi.Models.ReadingSession", b =>
                 {
-                    b.Navigation("Todos");
+                    b.HasOne("ArtemisApi.Models.Book", "Book")
+                        .WithMany("ReadingSessions")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_reading_sessions_books_book_id");
+
+                    b.HasOne("ArtemisApi.Models.User", "User")
+                        .WithMany("ReadingSessions")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_reading_sessions_users_user_id");
+
+                    b.Navigation("Book");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ArtemisApi.Models.UserBook", b =>
+                {
+                    b.HasOne("ArtemisApi.Models.Book", "Book")
+                        .WithMany("UserBooks")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_user_books_books_book_id");
+
+                    b.HasOne("ArtemisApi.Models.Shelf", "Shelf")
+                        .WithMany("UserBooks")
+                        .HasForeignKey("ShelfId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_user_books_shelves_shelf_id");
+
+                    b.HasOne("ArtemisApi.Models.User", "User")
+                        .WithMany("UserBooks")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_user_books_users_user_id");
+
+                    b.Navigation("Book");
+
+                    b.Navigation("Shelf");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ArtemisApi.Models.Book", b =>
+                {
+                    b.Navigation("ChapterNotes");
+
+                    b.Navigation("ReadingSessions");
+
+                    b.Navigation("UserBooks");
+                });
+
+            modelBuilder.Entity("ArtemisApi.Models.Shelf", b =>
+                {
+                    b.Navigation("UserBooks");
+                });
+
+            modelBuilder.Entity("ArtemisApi.Models.User", b =>
+                {
+                    b.Navigation("ChapterNotes");
+
+                    b.Navigation("ReadingSessions");
+
+                    b.Navigation("UserBooks");
                 });
 #pragma warning restore 612, 618
         }
